@@ -7,6 +7,10 @@ The **Sentiment Analysis** application uses a simple NLP technique for calculati
 
 The application receives a stream of *tweets* in the JSON format, each *tweet* corresponds to an event that has to be parsed in order to extract the relevant fields, in this case the *ID* of the tweet, the *language* and the *message*.
 
+<div style="text-align:center">
+<img align="center" src="https://raw.githubusercontent.com/mayconbordin/erad2016-streamprocessing/master/dataflow.png" height="300" />
+</div>
+
 After being parsed, the tweets are filtered, removing those that have been written in a language that is not supported by the application. By default only the English language is supported, to extend the support the operators that load the negative/positive list of words would have to switch lists between languages for each new event.
 
 Next, the tweets go through the *Stemmer*, which removes *stop words* from the message, which are words that usually don't carry sentiment, and thus are irrelevant for the next steps in the application.
