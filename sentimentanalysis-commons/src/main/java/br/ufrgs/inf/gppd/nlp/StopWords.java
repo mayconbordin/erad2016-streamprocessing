@@ -1,6 +1,7 @@
 package br.ufrgs.inf.gppd.nlp;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class StopWords implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StopWords.class);
     public static final long serialVersionUID = 42L;
     private List<String> stopWords;
     private static StopWords _singleton;
@@ -26,8 +28,7 @@ public class StopWords implements Serializable {
                 this.stopWords.add(line);
             }
         } catch (IOException ex) {
-            Logger.getLogger(this.getClass())
-                  .error("IO error while initializing", ex);
+            LOGGER.error("IO error while initializing", ex);
         } finally {
             try {
                 if (rd != null) rd.close();

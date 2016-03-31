@@ -1,6 +1,7 @@
 package br.ufrgs.inf.gppd;
 
 import br.ufrgs.inf.gppd.bolt.*;
+import br.ufrgs.inf.gppd.spout.TwitterSpout;
 import br.ufrgs.inf.gppd.utils.Properties;
 import org.apache.log4j.Logger;
 import org.apache.log4j.BasicConfigurator;
@@ -26,7 +27,7 @@ import storm.kafka.*;
 import java.util.UUID;
 
 public class SentimentAnalysisTopology {
-    private final Logger LOGGER = Logger.getLogger(this.getClass());
+    private final Logger logger = Logger.getLogger(this.getClass());
 
     public static void main(String[] args) throws Exception {
         BasicConfigurator.configure();
@@ -76,10 +77,16 @@ public class SentimentAnalysisTopology {
     private static StormTopology createTopology() {
         TopologyBuilder topology = new TopologyBuilder();
 
-        topology.setSpout("kafka_spout", createKafkaSpout(), 4);
+        topology.setSpout("twitter_spout", new TwitterSpout());
+
+        /*topology.setBolt("print", new PrinterBolt(), 4)
+                .shuffleGrouping("twitter_spout");*/
+
+
+        //topology.setSpout("twitter_spout", createKafkaSpout(), 4);
 
         topology.setBolt("twitter_filter", new TwitterFilterBolt(), 4)
-                .shuffleGrouping("kafka_spout");
+                .shuffleGrouping("twitter_spout");
 
         topology.setBolt("text_filter", new TextFilterBolt(), 4)
                 .shuffleGrouping("twitter_filter");
@@ -99,10 +106,16 @@ public class SentimentAnalysisTopology {
         topology.setBolt("score", new SentimentScoringBolt(), 4)
                 .shuffleGrouping("join");
 
-        topology.setBolt("hdfs", createHdfsBolt(), 4)
+        topology.setBolt("print", new PrinterBolt(), 4)
+                .shuffleGrouping("score");
+
+        topology.setBolt("csv", new CsvBolt(), 4)
+                .shuffleGrouping("score");
+
+        /*topology.setBolt("hdfs", createHdfsBolt(), 4)
                 .shuffleGrouping("score");
         topology.setBolt("nodejs", new NodeNotifierBolt(), 4)
-                .shuffleGrouping("score");
+                .shuffleGrouping("score");*/
 
         return topology.createTopology();
     }

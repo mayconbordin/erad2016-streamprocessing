@@ -1,6 +1,7 @@
 package br.ufrgs.inf.gppd.nlp;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 public class NegativeWords implements Serializable {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NegativeWords.class);
     public static final long serialVersionUID = 42L;
     private Set<String> negWords;
     private static NegativeWords _singleton;
@@ -26,7 +28,7 @@ public class NegativeWords implements Serializable {
                 negWords.add(line);
             }
         } catch (IOException ex) {
-            Logger.getLogger(this.getClass()).error("IO error while initializing", ex);
+            LOGGER.error("IO error while initializing", ex);
         } finally {
             try {
                 if (rd != null) rd.close();

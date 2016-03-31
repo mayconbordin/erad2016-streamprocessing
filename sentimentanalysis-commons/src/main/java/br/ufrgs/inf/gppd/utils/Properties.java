@@ -1,20 +1,21 @@
 package br.ufrgs.inf.gppd.utils;
 
-import org.apache.log4j.Logger;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.PropertiesConfiguration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Properties {
-    private static final Logger LOGGER = Logger.getLogger(Properties.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(Properties.class);
     private static Properties singleton;
 
     private Configuration config;
 
     private Properties() {
         try {
-            config = new PropertiesConfiguration(getClass().getResource("/sa.storm.properties"));
+            config = new PropertiesConfiguration(getClass().getResource("/sa.properties"));
         } catch (Exception ex) {
-            LOGGER.fatal("Could not load configuration", ex);
+            LOGGER.error("Could not load configuration", ex);
             LOGGER.trace(null, ex);
         }
     }
