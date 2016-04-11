@@ -12,6 +12,7 @@
     <modules>
         <module>sentimentanalysis-storm</module>
         <module>sentimentanalysis-spark</module>
+        <module>sentimentanalysis-flink</module>
         <module>sentimentanalysis-commons</module>
     </modules>
 
