@@ -21,6 +21,7 @@ The **Sentiment Analysis** application has been implemented in the following pla
 
   - [Storm](https://github.com/mayconbordin/erad2016-streamprocessing/tree/master/sentimentanalysis-storm)
   - [Spark Streaming](https://github.com/mayconbordin/erad2016-streamprocessing/tree/master/sentimentanalysis-spark)
+  - [Flink Streaming](https://github.com/mayconbordin/erad2016-streamprocessing/tree/master/sentimentanalysis-flink)
 
 ## More Applications
 
