@@ -1,5 +1,5 @@
 # erad2016-streamprocessing
-Stream Processing Application for Sentiment Analysis with Storm and Spark @ [ERAD 2016](http://www.unisinos.br/eventos/erad-rs-2016-exerad)
+Working with Big Data in Real Time @ [ERAD 2016](http://www.unisinos.br/eventos/erad-rs-2016-exerad)
 
 ## Sentiment Analysis
 
